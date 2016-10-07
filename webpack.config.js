@@ -37,6 +37,7 @@ if (!isDebug) {
         screw_ie8: true
       }
     }),
+    new webpack.optimize.DedupePlugin(),
     new CompressionPlugin({
       asset: '[path].gz[query]',
       algorithm: 'gzip',
