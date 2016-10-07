@@ -1,12 +1,61 @@
 let path = require('path');
 let webpack = require('webpack');
 let autoprefixer = require('autoprefixer');
+let BrotliPlugin = require('brotli-webpack-plugin');
+let CleanWebpackPlugin = require('clean-webpack-plugin');
+let CompressionPlugin = require('compression-webpack-plugin');
 let ExtractTextPlugin = require('extract-text-webpack-plugin');
+let HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const isDebug = process.argv.indexOf('-p') < 0;
 
+let plugins = [
+  new webpack.DefinePlugin({
+    'process.env.NODE_ENV': isDebug ? '"development"' : '"production"'
+  }),
+  new webpack.optimize.OccurrenceOrderPlugin(),
+  new webpack.optimize.CommonsChunkPlugin('vendor', 'js/vendor.js'),
+  new ExtractTextPlugin('styles/[name].css'),
+  new HtmlWebpackPlugin({
+    filename: 'index.html',
+    template: './src/index.html'
+  })
+];
+
+if (!isDebug) {
+  plugins = plugins.concat([
+    new CleanWebpackPlugin(['dist'], {
+      verbose: true,
+      dry: false
+    }),
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        warnings: false,
+        drop_console: true
+      },
+      mangle: {
+        screw_ie8: true
+      }
+    }),
+    new CompressionPlugin({
+      asset: '[path].gz[query]',
+      algorithm: 'gzip',
+      test: /\.(js|css|html|svg)$/,
+      threshold: 1024,
+      minRatio: 0.9
+    }),
+    new BrotliPlugin({
+      asset: '[path].br[query]',
+      test: /\.(js|css|html|svg)$/,
+      threshold: 1024,
+      minRatio: 0.9
+    })
+  ]);
+}
+
 module.exports = {
   cache: true,
+  debug: isDebug,
   entry: {
     app: './src/app.js',
     vendor: ['angular', 'angular-ui-router']
@@ -16,20 +65,8 @@ module.exports = {
     publicPath: '/',
     filename: 'js/app.js'
   },
-  plugins: [
-    new webpack.DefinePlugin({
-      'process.env.NODE_ENV': isDebug ? '"development"' : '"production"'
-    }),
-    new webpack.optimize.OccurrenceOrderPlugin(),
-    new webpack.optimize.CommonsChunkPlugin('vendor', 'js/vendor.js'),
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false
-      }
-    }),
-    new ExtractTextPlugin('styles/[name].css'),
-  ],
-  devtool: isDebug ? 'source-map' : null,
+  plugins: plugins,
+  devtool: 'source-map',
   module: {
     loaders: [{
       test: /\.js$/,
@@ -40,7 +77,7 @@ module.exports = {
       loader: ExtractTextPlugin.extract('style', 'css!postcss!sass')
     }, {
       test: /\.html$/,
-      loader: 'html'
+      loader: 'raw!html-minify'
     }]
   },
   sassLoader: {
@@ -52,5 +89,11 @@ module.exports = {
   postcss: [autoprefixer({
     browsers: ['last 2 versions'],
     cascade: false
-  })]
+  })],
+  'html-minify-loader': {
+    empty: true,
+    dom: { // options of !(htmlparser2)[https://github.com/fb55/htmlparser2]
+      lowerCaseAttributeNames: false, // do not call .toLowerCase for each attribute name (Angular2 use camelCase attributes)
+    }
+  }
 };
