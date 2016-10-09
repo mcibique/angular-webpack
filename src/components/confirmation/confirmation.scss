@@ -1,0 +1,48 @@
+@import 'variables';
+
+$background-color: #fff;
+$backdrop-color: rgba(#000, 0.3);
+$border-color: $default-border-color;
+$vertical-padding: 3rem;
+$horizontal-padding: 2rem;
+
+.confirmation-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: $backdrop-color;
+}
+
+.confirmation-dialog {
+  background-color: $background-color;
+  border: 1px solid $border-color;
+  margin: 3rem auto;
+  max-width: 85%;
+
+  %content-padding {
+    padding: $horizontal-padding $vertical-padding;
+  }
+
+  &__title {
+    @extend %content-padding;
+    border-bottom: 1px solid $border-color;
+    font-size: 2rem;
+    font-weight: bold;
+  }
+
+  &__content {
+    @extend %content-padding;
+  }
+
+  &__footer {
+    @extend %content-padding;
+    border-top: 1px solid $border-color;
+    text-align: center;
+  }
+
+  &__message {
+    text-align: center;
+  }
+}

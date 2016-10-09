@@ -44,4 +44,46 @@ describe('MainController', function () {
       expect(mainController.profile).toBe(randomProfile);
     });
   });
+
+  describe('openConfirmation()', function () {
+    let mainController,
+      confirmationDefered,
+      confirmationService;
+
+    beforeEach(function () {
+      confirmationDefered = $q.defer();
+      confirmationService = jasmine.createSpyObj('confirmationService', ['show']);
+      confirmationService.show.and.returnValue(confirmationDefered.promise);
+
+      mainController = $controller('MainController', { confirmationService });
+    });
+
+    it('should start with empty confirmation result', function () {
+      expect(mainController.confirmationResult).not.toBeDefined();
+    });
+
+    it('should open confirmation', function () {
+      mainController.openConfirmation();
+
+      expect(confirmationService.show).toHaveBeenCalledWith(jasmine.any(String), jasmine.any(String));
+    });
+
+    it('should display confirmed result', function () {
+      mainController.openConfirmation();
+
+      confirmationDefered.resolve();
+      $rootScope.$digest();
+      expect(mainController.confirmationResult).toBeDefined();
+      expect(mainController.confirmationResult.length).toBeGreaterThan(0);
+    });
+
+    it('should display cancelled result', function () {
+      mainController.openConfirmation();
+
+      confirmationDefered.reject();
+      $rootScope.$digest();
+      expect(mainController.confirmationResult).toBeDefined();
+      expect(mainController.confirmationResult.length).toBeGreaterThan(0);
+    });
+  });
 });

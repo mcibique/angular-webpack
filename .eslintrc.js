@@ -23,6 +23,8 @@ module.exports = {
     'dot-location': ['error', 'property'],
     'space-before-function-paren': ['error', { anonymous: 'always', named: 'never' }],
     'object-curly-spacing': ['error', 'always'],
+    'no-empty-function': ['error', { 'allow': ['arrowFunctions'] }],
+    'object-property-newline': ['error', { 'allowMultiplePropertiesPerLine': true }],
 
     'object-curly-newline': 'off',
     'sort-imports': 'off',
@@ -36,6 +38,9 @@ module.exports = {
     'newline-after-var': 'off',
     'prefer-arrow-callback': 'off',
     'no-magic-numbers': 'off',
+    'no-invalid-this': 'off',
+    'max-statements': 'off',
+    'max-len': 'off',
 
     'angular/no-service-method': 'off'
   }

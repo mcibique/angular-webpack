@@ -59,7 +59,7 @@ module.exports = {
   debug: isDebug,
   entry: {
     app: './src/app.js',
-    vendor: ['angular', 'angular-ui-router']
+    vendor: ['angular', 'angular-ui-router', 'rxjs/Subject']
   },
   output: {
     path: './dist/',
@@ -84,7 +84,8 @@ module.exports = {
   sassLoader: {
     includePaths: [
       path.resolve(__dirname, './node_modules/normalize-scss/sass'),
-      path.resolve(__dirname, './node_modules/support-for/sass')
+      path.resolve(__dirname, './node_modules/support-for/sass'),
+      path.resolve(__dirname, './src/sass')
     ]
   },
   postcss: [autoprefixer({

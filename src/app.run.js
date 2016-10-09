@@ -1,4 +1,4 @@
 /* @ngInject */
 export default function appRun($log) {
-  $log.debug('Hello World!');
+  $log.debug('Application is running.');
 }

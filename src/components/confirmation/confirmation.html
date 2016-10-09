@@ -1,0 +1,13 @@
+<div class="confirmation-backdrop" ng-if="$ctrl.isShown">
+    <div class="confirmation-dialog">
+        <div class="confirmation-dialog__title">{{ $ctrl.title || 'Dialog' }}</div>
+        <div class="confirmation-dialog__content">
+            <p class="confirmation-dialog__message">{{ $ctrl.message || 'Question?' }}</p>
+
+        </div>
+        <div class="confirmation-dialog__footer">
+            <button ng-click="$ctrl.onCancelled()">Cancel</button>
+            <button ng-click="$ctrl.onConfirmed()">OK</button>
+        </div>
+    </div>
+</div>

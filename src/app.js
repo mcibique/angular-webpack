@@ -1,11 +1,12 @@
 import ng from 'angular';
-import uiRouter from 'angular-ui-router';
+import router from 'angular-ui-router';
+
+import './app.scss';
 
 import config from './app.config';
 import run from './app.run';
 import main from './states/main/main.module';
-import './app.scss';
 
-ng.module('myApp', [uiRouter, main])
+ng.module('myApp', [router, main])
   .config(config)
   .run(run);

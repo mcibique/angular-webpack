@@ -1,0 +1,38 @@
+@import 'variables';
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-size: 1.4rem;
+  min-width: 320px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+:focus {
+  outline: none;
+}
+
+button {
+  $border-color: $default-border-color;
+  $background-color: #dedede;
+
+  border: 0.1rem solid $border-color;
+  border-radius: 0.2rem;
+  padding: 0.4rem 1rem;
+  background-color: $background-color;
+  cursor: pointer;
+
+  &:hover,
+  &:focus {
+    background-color: rgba($background-color, 0.8);
+  }
+
+  &:active {
+    background-color: rgba($background-color, 0.6);
+  }
+}
