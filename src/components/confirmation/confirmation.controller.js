@@ -6,10 +6,10 @@ export default class ConfirmationController {
     this.isShown = false;
     this.confirm = this.cancel = angular.noop;
 
-    this.subscription = confirmationService.onShow.subscribe(this::this.onShow);
+    let subscription = confirmationService.onShow.subscribe(this::this.onShow);
 
     $scope.$on('$destroy', this::function onDestroyed() {
-      this.subscription.unsubscribe();
+      subscription.unsubscribe();
     });
   }
 
