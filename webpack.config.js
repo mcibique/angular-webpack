@@ -97,5 +97,10 @@ module.exports = {
     dom: { // options of !(htmlparser2)[https://github.com/fb55/htmlparser2]
       lowerCaseAttributeNames: false, // do not call .toLowerCase for each attribute name (Angular2 use camelCase attributes)
     }
+  },
+  devServer: {
+    historyApiFallback: {
+      index: 'index.html'
+    }
   }
 };

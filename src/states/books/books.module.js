@@ -5,7 +5,9 @@ import './books.scss';
 import BooksController from './books.controller';
 import routes from './books.routes';
 
-export default ng.module('myApp.books', [router])
+import create from './create/create.module';
+
+export default ng.module('myApp.books', [router, create])
   .config(routes)
   .controller('BooksController', BooksController)
   .name;

@@ -1,0 +1,11 @@
+<h2>Create new book</h2>
+
+<form name="bookForm" novalidate autocomplete="off" ng-submit="$ctrl.submit(bookForm)">
+    <label for="title">Title:</label>
+    <input type="text" id="title" name="title" ng-model="$ctrl.book.title" required>
+
+    <label for="author">Author:</label>
+    <input type="text" id="author" name="author" ng-model="$ctrl.book.author" required>
+
+    <button type="submit">Save</button>
+</form>

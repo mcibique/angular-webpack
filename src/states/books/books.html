@@ -1,7 +1,11 @@
 <h1>Books</h1>
 
 <ul>
-    <li ng-repeat="book in books.items">
+    <li ng-repeat="book in books.items track by book.id">
         {{:: book.title}} [{{:: book.author }}] <button type="button" ng-click="books.deleteBook(book.id)">Delete</button>
     </li>
 </ul>
+
+<button type="button" ui-sref="books.create">Create new book</button>
+
+<ui-view></ui-view>

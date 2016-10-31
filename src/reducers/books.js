@@ -1,24 +1,31 @@
-import { DELETE_BOOK } from '../actions/books';
+import { CREATE_BOOK, DELETE_BOOK } from '../actions/books';
 
 const defaultState = [{
-  id: 'book1',
+  id: 1,
   title: 'Book 1',
   author: 'Author Name 1'
 }, {
-  id: 'book2',
+  id: 2,
   title: 'Book 2',
   author: 'Author Name 2'
 }, {
-  id: 'book3',
+  id: 3,
   title: 'Book 3',
   author: 'Author Name 3'
 }];
 
+let lastId = defaultState.length;
+
 export default function books(state = defaultState, action) {
   switch (action.type) {
     case DELETE_BOOK:
-    console.log('deleting');
       return state.filter(book => book.id !== action.id);
+    case CREATE_BOOK:
+      let book = {
+        ...action.book,
+        id: ++lastId
+      }
+      return [...state, book];
     default:
       return state;
   }
