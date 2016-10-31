@@ -1,0 +1,7 @@
+<h1>Books</h1>
+
+<ul>
+    <li ng-repeat="book in books.items">
+        {{:: book.title}} [{{:: book.author }}] <button type="button" ng-click="books.deleteBook(book.id)">Delete</button>
+    </li>
+</ul>
