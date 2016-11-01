@@ -1,9 +1,5 @@
-import thunk from 'redux-thunk';
-import reducers from './reducers';
-
 /* @ngInject */
-export default function appConfig($urlRouterProvider, $locationProvider, $ngReduxProvider) {
+export default function appConfig($urlRouterProvider, $locationProvider) {
   $locationProvider.html5Mode(true);
   $urlRouterProvider.otherwise('/');
-  $ngReduxProvider.createStoreWith(reducers, [thunk], []);
 }

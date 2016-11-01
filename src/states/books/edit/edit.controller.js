@@ -19,8 +19,8 @@ export default class BookEditController {
   }
 
   mapStateToThis($stateParams, state) {
-    let id = +$stateParams.id;
-    let book = state.books.find(book => book.id === id);
+    let id = +$stateParams.id,
+        book = state.books.find(book => book.id === id);
 
     return {
       book: { ...book }

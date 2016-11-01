@@ -20,5 +20,5 @@ export function editBook(book) {
   return {
     type: EDIT_BOOK,
     book
-  }
+  };
 }

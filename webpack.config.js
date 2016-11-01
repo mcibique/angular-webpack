@@ -18,7 +18,10 @@ let plugins = [
   new ExtractTextPlugin('styles/[name].css'),
   new HtmlWebpackPlugin({
     filename: 'index.html',
-    template: './src/index.html'
+    inject: 'body',
+    template: '!!ejs!./src/index.html',
+    cache: false,
+    hash: true
   })
 ];
 
@@ -54,17 +57,23 @@ if (!isDebug) {
   ]);
 }
 
+let entry = {
+  app: './src/app.js',
+  vendor: ['angular', 'angular-ui-router', 'rxjs/Subject']
+}
+
+if (isDebug) {
+  entry['dev-tools'] = './src/store/dev/store.dev-tools.js'
+}
+
 module.exports = {
   cache: true,
   debug: isDebug,
-  entry: {
-    app: './src/app.js',
-    vendor: ['angular', 'angular-ui-router', 'rxjs/Subject']
-  },
+  entry: entry,
   output: {
     path: './dist/',
     publicPath: '/',
-    filename: 'js/app.js'
+    filename: 'js/[name].js'
   },
   plugins: plugins,
   devtool: 'source-map',
@@ -100,7 +109,7 @@ module.exports = {
   },
   devServer: {
     historyApiFallback: {
-      index: 'index.html'
+      index: '/index.html'
     }
   }
 };

@@ -3,7 +3,7 @@ import { createBook } from '../../../actions/books';
 /* @ngInject */
 export default class BookCreateController {
   constructor($ngRedux, $scope, $state) {
-    let unsubscribe = $ngRedux.connect(this.mapStateToThis, { createBook })(this);
+    let unsubscribe = $ngRedux.connect(() => {}, { createBook })(this);
     $scope.$on('$destroy', unsubscribe);
 
     this.$state = $state;
@@ -23,9 +23,5 @@ export default class BookCreateController {
     }
     this.createBook(this.book);
     this.$state.go('books');
-  }
-
-  mapStateToThis(state) {
-    return {};
   }
 }

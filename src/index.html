@@ -10,7 +10,8 @@
     <body ng-app="myApp" ng-strict-di>
         <ui-view>Loading&hellip;</ui-view>
         <confirmation></confirmation>
-        <script src="/js/vendor.js" charset="utf-8"></script>
-        <script src="/js/app.js" charset="utf-8"></script>
+        <% if (webpackConfig.debug) { %>
+        <div id="dev-tools"></div>
+        <% } %>
     </body>
 </html>

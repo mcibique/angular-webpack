@@ -25,11 +25,12 @@ export default function books(state = defaultState, action) {
         ...action.book,
         id: ++lastId
       }
+
       return [...state, book];
     case EDIT_BOOK:
       return state.map(function (book) {
         if (book.id === action.book.id) {
-          return { ...action.book }
+          return { ...action.book };
         } else {
           return book;
         }
