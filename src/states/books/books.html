@@ -6,6 +6,7 @@
         <button type="button" ui-sref="books.edit({ id: book.id })">Edit</button>
         <button type="button" ng-click="books.deleteBook(book.id)">Delete</button>
     </li>
+    <li ng-if="books.items.length === 0">No books available</li>
 </ul>
 
 <button type="button" ui-sref="books.create">Create new book</button>
