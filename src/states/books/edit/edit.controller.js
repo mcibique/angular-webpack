@@ -3,10 +3,12 @@ import { editBook } from '../../../actions/books';
 /* @ngInject */
 export default class BookEditController {
   constructor($ngRedux, $scope, $state, $stateParams) {
-    let unsubscribe = $ngRedux.connect(this.mapStateToThis.bind(this, $stateParams), { editBook })(this);
+    this.$state = $state;
+    this.$stateParams = $stateParams;
+
+    let unsubscribe = $ngRedux.connect(this::this.mapStateToThis, { editBook })(this);
     $scope.$on('$destroy', unsubscribe);
 
-    this.$state = $state;
     this.formTitle = 'Edit book';
   }
 
@@ -18,8 +20,12 @@ export default class BookEditController {
     this.$state.go('books');
   }
 
-  mapStateToThis($stateParams, state) {
-    let id = +$stateParams.id,
+  cancel() {
+    this.$state.go('books');
+  }
+
+  mapStateToThis(state) {
+    let id = Number(this.$stateParams.id),
         book = state.books.find(book => book.id === id);
 
     return {

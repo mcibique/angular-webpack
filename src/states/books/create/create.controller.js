@@ -25,6 +25,10 @@ export default class BookCreateController {
     this.$state.go('books');
   }
 
+  cancel() {
+    this.$state.go('books');
+  }
+
   mapStateToThis() {
     return {};
   }
