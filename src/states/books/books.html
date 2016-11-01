@@ -2,7 +2,9 @@
 
 <ul>
     <li ng-repeat="book in books.items track by book.id">
-        {{:: book.title}} [{{:: book.author }}] <button type="button" ng-click="books.deleteBook(book.id)">Delete</button>
+        {{ book.title}} [{{ book.author }}]
+        <button type="button" ui-sref="books.edit({ id: book.id })">Edit</button>
+        <button type="button" ng-click="books.deleteBook(book.id)">Delete</button>
     </li>
 </ul>
 

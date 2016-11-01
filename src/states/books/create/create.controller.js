@@ -7,6 +7,7 @@ export default class BookCreateController {
     $scope.$on('$destroy', unsubscribe);
 
     this.$state = $state;
+    this.formTitle = 'Add new book';
   }
 
   $onInit() {
