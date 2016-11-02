@@ -3,7 +3,6 @@ import { render } from 'react-dom';
 import LogMonitor from 'redux-devtools-log-monitor';
 import DockMonitor from 'redux-devtools-dock-monitor';
 import SliderMonitor from 'redux-slider-monitor';
-import { ImportExportMonitor } from 'redux-import-export-monitor';
 import React from 'react';
 import { Provider } from 'react-redux';
 
@@ -11,7 +10,6 @@ const DevTools = createDevTools(
   <DockMonitor toggleVisibilityKey='ctrl-h' changePositionKey='ctrl-q' changeMonitorKey='ctrl-m' defaultIsVisible={false}>
     <LogMonitor theme='tomorrow' />
     <SliderMonitor keyboardEnabled />
-    <ImportExportMonitor openModalKey='ctrl-e' />
   </DockMonitor>
 );
 
