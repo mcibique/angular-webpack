@@ -1,0 +1,29 @@
+@import 'variables';
+
+.book-form {
+  background-color: rgba(#333, 0.7);
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+
+  &__content {
+    background-color: white;
+    border: 0.1rem solid $default-border-color;
+    box-shadow: 0 0 0.4rem #333;
+    margin: 2rem auto;
+    width: 80%;
+    max-width: 60rem;
+  }
+
+  &__title,
+  &__actions {
+    background-color: grey;
+    padding: 1rem 2rem;
+  }
+
+  &__form {
+    padding: 3rem 2rem;
+  }
+}

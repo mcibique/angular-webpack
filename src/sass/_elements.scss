@@ -1,0 +1,68 @@
+@import 'variables';
+
+h1,
+h2 {
+  margin: 0;
+}
+
+p {
+  margin: 0;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+ui-view {
+  display: block;
+}
+
+button {
+  $border-color: $default-border-color;
+  $background-color: #dedede;
+
+  border: 0.1rem solid $border-color;
+  border-radius: 0.2rem;
+  padding: 0.4rem 1rem;
+  background-color: $background-color;
+  cursor: pointer;
+  line-height: 1.6rem;
+  font-size: 1.4rem;
+
+  &:hover,
+  &:focus {
+    background-color: rgba($background-color, 0.8);
+  }
+
+  &:active {
+    background-color: rgba($background-color, 0.6);
+  }
+}
+
+form {
+  display: block;
+  width: 100%;
+
+  label,
+  input {
+    display: block;
+    width: 100%;
+  }
+
+  label {
+    font-weight: bold;
+  }
+
+  input {
+    border: 0.1rem solid $default-border-color;
+    border-radius: 0.2rem;
+    padding: 0.9rem;
+    line-height: 1.6rem;
+    font-size: 1.4rem;
+  }
+
+  input + label {
+    margin-top: 1rem;
+  }
+}

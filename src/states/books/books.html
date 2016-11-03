@@ -1,14 +1,19 @@
-<h1>Books</h1>
+<div class="books">
+    <h1 class="books__header">Books</h1>
 
-<ul>
-    <li ng-repeat="book in books.items track by book.id">
-        {{ book.title}} [{{ book.author }}]
-        <button type="button" ui-sref="books.edit({ id: book.id })">Edit</button>
-        <button type="button" ng-click="books.deleteBook(book.id)">Delete</button>
-    </li>
-    <li ng-if="books.items.length === 0">No books available</li>
-</ul>
+    <ul class="books-list">
+        <li class="books-list__item book" ng-repeat="book in books.items track by book.id">
+            <h2 class="book__title">{{ book.title}}</h2>
+            <p class="book__author"><em>by</em> {{ book.author }}</p>
+            <button type="button" class="books-list__button" ui-sref="books.edit({ id: book.id })">Edit</button>
+            <button type="button" class="books-list__button" ng-click="books.deleteBook(book.id)">Delete</button>
+        </li>
+        <li class="books-list__empty-message" ng-if="books.items.length === 0">No books available</li>
+    </ul>
 
-<button type="button" ui-sref="books.create">Create new book</button>
+    <div class="books-actions">
+        <button type="button" class="books-actions__button" ui-sref="books.create">Create new book</button>
+    </div>
 
-<ui-view></ui-view>
+    <ui-view></ui-view>
+</div>

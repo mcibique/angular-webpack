@@ -67,6 +67,6 @@
     "build": "webpack --progress --colors -p",
     "test": "karma start",
     "lint": "eslint src/**/*.js --format node_modules/eslint-friendly-formatter",
-    "watch": "webpack-dev-server --progress --inline --content-base src --compress --port 9099"
+    "watch": "webpack-dev-server --hot --progress --inline --content-base src --compress --port 9099"
   }
 }

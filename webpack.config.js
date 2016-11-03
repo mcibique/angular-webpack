@@ -15,7 +15,6 @@ let plugins = [
   }),
   new webpack.optimize.OccurrenceOrderPlugin(),
   new webpack.optimize.CommonsChunkPlugin('vendor', 'js/vendor.js'),
-  new ExtractTextPlugin('styles/[name].css'),
   new HtmlWebpackPlugin({
     filename: 'index.html',
     inject: 'body',
@@ -27,6 +26,7 @@ let plugins = [
 
 if (!isDebug) {
   plugins = plugins.concat([
+    new ExtractTextPlugin('styles/[name].css'),
     new CleanWebpackPlugin(['dist'], {
       verbose: true,
       dry: false
@@ -84,7 +84,7 @@ module.exports = {
       loaders: ['ng-annotate', 'babel']
     }, {
       test: /\.scss$/,
-      loader: ExtractTextPlugin.extract('style', 'css!postcss!sass')
+      loader: isDebug ? 'style!css?sourceMap!postcss?sourceMap!sass?sourceMap' : ExtractTextPlugin.extract('style', 'css!postcss!sass')
     }, {
       test: /\.html$/,
       loader: 'raw!html-minify'
