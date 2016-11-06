@@ -13,7 +13,7 @@ export function createBook(book) {
   return {
     type: CREATE_BOOK,
     book
-  }
+  };
 }
 
 export function editBook(book) {

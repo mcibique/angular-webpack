@@ -2,29 +2,29 @@ import main from './main.module';
 
 describe('MainController', function () {
   let $controller,
-    $rootScope,
-    $q;
+      $rootScope,
+      $scope,
+      $q,
+      $ngRedux;
 
   beforeEach(function () {
     angular.mock.module(main);
     angular.mock.inject(function (_$controller_, _$q_, _$rootScope_) {
       $controller = _$controller_;
       $rootScope = _$rootScope_;
+      $scope = $rootScope.$new(true);
       $q = _$q_;
+
+      $ngRedux = jasmine.createSpyObj('$ngRedux', ['connect']);
+      $ngRedux.connect.and.returnValue(() => {});
     });
   });
 
   describe('constructor', function () {
-    let mainController,
-      profileDefered,
-      profileService;
+    let mainController;
 
     beforeEach(function () {
-      profileDefered = $q.defer();
-      profileService = jasmine.createSpyObj('profileService', ['getProfile']);
-      profileService.getProfile.and.returnValue(profileDefered.promise);
-
-      mainController = $controller('MainController', { profileService });
+      mainController = $controller('MainController', { $ngRedux, $scope });
     });
 
     it('should create MainController object', function () {
@@ -35,27 +35,44 @@ describe('MainController', function () {
       expect(mainController.title).toBeTruthy();
     });
 
-    it('should initialize the profile', function () {
-      let randomProfile = {
-        userName: 'random user name'
-      };
-      profileDefered.resolve(randomProfile);
-      $rootScope.$digest();
-      expect(mainController.profile).toBe(randomProfile);
+    it('should connect actions', function () {
+      expect($ngRedux.connect).toHaveBeenCalled();
+    });
+  });
+
+  describe('$onInit()', function () {
+    let mainController,
+        profileAction,
+        profileService;
+
+    beforeEach(function () {
+      profileAction = {};
+      profileService = jasmine.createSpyObj('profileService', ['getProfile']);
+      profileService.getProfile.and.returnValue(profileAction);
+
+      mainController = $controller('MainController', { $ngRedux, $scope, profileService });
+      mainController.dispatch = jasmine.createSpy('dispatch');
+
+      mainController.$onInit();
+    });
+
+    it('should initialize profile', function () {
+      expect(profileService.getProfile).toHaveBeenCalled();
+      expect(mainController.dispatch).toHaveBeenCalledWith(profileAction);
     });
   });
 
   describe('openConfirmation()', function () {
     let mainController,
-      confirmationDefered,
-      confirmationService;
+        confirmationDefered,
+        confirmationService;
 
     beforeEach(function () {
       confirmationDefered = $q.defer();
       confirmationService = jasmine.createSpyObj('confirmationService', ['show']);
       confirmationService.show.and.returnValue(confirmationDefered.promise);
 
-      mainController = $controller('MainController', { confirmationService });
+      mainController = $controller('MainController', { $ngRedux, $scope, confirmationService });
     });
 
     it('should start with empty confirmation result', function () {

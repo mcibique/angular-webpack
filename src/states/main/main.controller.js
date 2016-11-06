@@ -1,14 +1,23 @@
 /* @ngInject */
 export default class MainController {
-  constructor(profileService, confirmationService) {
-    this.profileService = profileService;
+  constructor($ngRedux, $scope, profileService, confirmationService) {
     this.confirmationService = confirmationService;
+    this.profileService = profileService;
 
     this.title = 'Angular Webpack Test';
 
-    this.profileService.getProfile().then(profile => {
-      this.profile = profile;
-    });
+    let unsubscribe = $ngRedux.connect(this.mapStateToThis, dispatch => { this.dispatch = dispatch; })(this);
+    $scope.$on('$destroy', unsubscribe);
+  }
+
+  $onInit() {
+    this.dispatch(this.profileService.getProfile());
+  }
+
+  mapStateToThis(state) {
+    return {
+      profile: state.profile
+    };
   }
 
   openConfirmation() {

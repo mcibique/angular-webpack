@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import { createDevTools } from 'redux-devtools';
 import { render } from 'react-dom';
 import LogMonitor from 'redux-devtools-log-monitor';

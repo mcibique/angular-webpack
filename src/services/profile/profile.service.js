@@ -1,20 +1,27 @@
+import { requestProfile, receiveProfile } from '../../actions/profile';
+
 /* @ngInject */
 export default class ProfileService {
-  constructor($timeout, $q) {
+  constructor($timeout) {
     this.$timeout = $timeout;
-    this.$q = $q;
-
-    this.profile = {
-      userName: 'random user name',
-      lastLoggedIn: new Date()
-    };
   }
 
   getProfile() {
-    return this.$q(resolve => {
-      this.$timeout(() => {
-        resolve(this.profile);
-      }, 250, false);
-    });
+    return (dispatch) => {
+      dispatch(requestProfile());
+
+      function fetchProfile() {
+        return {
+          userName: 'testUser',
+          firstName: 'Test',
+          lastName: 'User',
+          lastLoggedIn: new Date()
+        };
+      }
+
+      return this
+        .$timeout(fetchProfile, 1000)
+        .then(profile => dispatch(receiveProfile(profile)));
+    };
   }
 }

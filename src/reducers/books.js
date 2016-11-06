@@ -24,7 +24,7 @@ export default function books(state = defaultState, action) {
       let book = {
         ...action.book,
         id: ++lastId
-      }
+      };
 
       return [...state, book];
     case EDIT_BOOK:

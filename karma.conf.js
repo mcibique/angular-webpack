@@ -1,7 +1,3 @@
-var webpackConfig = require('./webpack.config.js');
-webpackConfig.entry = {};
-webpackConfig.output = {};
-
 module.exports = function (config) {
   config.set({
     basePath: '',

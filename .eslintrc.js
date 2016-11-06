@@ -19,12 +19,13 @@ module.exports = {
     'quote-props': ['error', 'as-needed'],
     'arrow-parens': ['error', 'as-needed'],
     'quotes': ['error', 'single'],
-    'indent': ['error', 2],
+    'indent': ['error', 2, { 'VariableDeclarator': 2, 'SwitchCase': 1 }],
     'dot-location': ['error', 'property'],
     'space-before-function-paren': ['error', { anonymous: 'always', named: 'never' }],
     'object-curly-spacing': ['error', 'always'],
     'no-empty-function': ['error', { 'allow': ['arrowFunctions'] }],
     'object-property-newline': ['error', { 'allowMultiplePropertiesPerLine': true }],
+    'func-style': ['error', 'declaration', { 'allowArrowFunctions': true }],
 
     'object-curly-newline': 'off',
     'sort-imports': 'off',
@@ -41,6 +42,12 @@ module.exports = {
     'no-invalid-this': 'off',
     'max-statements': 'off',
     'max-len': 'off',
+    'max-params': 'off',
+    'one-var': 'off',
+    'no-shadow': 'off',
+    'brace-style': 'off',
+    'class-methods-use-this': 'off',
+    'global-require': 'off',
 
     'angular/no-service-method': 'off'
   }

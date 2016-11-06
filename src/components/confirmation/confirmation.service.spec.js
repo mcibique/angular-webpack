@@ -25,8 +25,8 @@ describe('ConfirmationService', function () {
 
     it('should publish given params', function () {
       let title = 'Random title',
-        message = 'Random message',
-        showPromise = confirmationService.show(title, message);
+          message = 'Random message',
+          showPromise = confirmationService.show(title, message);
 
       expect(showPromise).toBeDefined();
       expect(confirmationService.onShow.next).toHaveBeenCalledWith({ title, message, resolve: jasmine.any(Function), reject: jasmine.any(Function) });

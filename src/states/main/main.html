@@ -1,14 +1,18 @@
 <header>
-    <h1>{{:: main.title }}</h1>
+    <h1 class="main-title">{{:: main.title }}</h1>
 </header>
-<main>
-    <h2>Welcome {{ main.profile.userName }}</h2>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente at laudantium corrupti reprehenderit libero blanditiis temporibus. Expedita distinctio laboriosam voluptatem inventore facere, corporis est facilis placeat recusandae vitae. Facilis, quos!</p>
+<main ng-if="!main.profile.fetching" class="welcome">
+    <h2 class="welcome__title">Welcome
+        {{ main.profile.firstName + ' ' + main.profile.lastName + ' (' + main.profile.userName + ')' }}</h2>
+    <p class="welcome__description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magni quas debitis corrupti ipsa quod hic maxime at temporibus quibusdam quo, laudantium ex, quia vitae recusandae dolores. Aspernatur sapiente eos deleniti iusto sit sed, aliquam animi, exercitationem vero. Voluptatem commodi dolorum reiciendis illo libero molestiae, numquam blanditiis tempore, unde pariatur dolores ipsa nobis voluptate quam officiis harum possimus sed quod repellat eaque in consequatur assumenda! Perspiciatis odit amet eum voluptas quibusdam, voluptate fugiat repudiandae. Repudiandae possimus odit beatae aperiam amet cumque ipsa illum, eum perspiciatis, nam ratione molestias consequatur quae. Rem dignissimos eum, accusantium error eos cupiditate maiores fugit vel eius.</p>
 
-    <button ng-click="main.openConfirmation()">Trigger confirmation</button>
-    <p>{{ main.confirmationResult }}</p>
+    <p class="welcome__confirmation">
+        <button ng-click="main.openConfirmation()">Trigger confirmation</button>
+        {{ main.confirmationResult }}
+    </p>
 
-    <nav>
+    <nav class="welcome__navigation">
         <a ui-sref="books">Books</a>
     </nav>
 </main>
+<main ng-if="main.profile.fetching" class="welcome welcome--loading">Loading profile&hellip;</main>

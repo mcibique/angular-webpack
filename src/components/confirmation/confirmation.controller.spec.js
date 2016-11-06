@@ -2,9 +2,9 @@ import confirmation from './confirmation.module';
 
 describe('ConfirmationController', function () {
   let confirmationController,
-    confirmationService,
-    subscription,
-    $scope;
+      confirmationService,
+      subscription,
+      $scope;
 
   beforeEach(function () {
     confirmationService = {
@@ -50,9 +50,9 @@ describe('ConfirmationController', function () {
 
   describe('onShow()', function () {
     let title = 'Random title',
-      message = 'Random message',
-      resolve = () => {},
-      reject = () => {};
+        message = 'Random message',
+        resolve = () => {},
+        reject = () => {};
 
     beforeEach(function () {
       confirmationController.onShow({ title, message, resolve, reject });

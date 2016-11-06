@@ -14,7 +14,7 @@ export default class BookCreateController {
     this.book = {
       title: '',
       author: ''
-    }
+    };
   }
 
   submit(bookForm) {
