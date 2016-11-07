@@ -11,7 +11,8 @@ const isDebug = process.argv.indexOf('-p') < 0;
 
 let plugins = [
   new webpack.DefinePlugin({
-    'process.env.NODE_ENV': isDebug ? '"development"' : '"production"'
+    'process.env.NODE_ENV': isDebug ? '"development"' : '"production"',
+    'myApp.DEBUG': isDebug
   }),
   new webpack.optimize.OccurrenceOrderPlugin(),
   new webpack.optimize.CommonsChunkPlugin('vendor', 'js/vendor.js'),
